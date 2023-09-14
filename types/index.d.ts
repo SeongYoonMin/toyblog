@@ -1,7 +1,7 @@
 interface IBoard {
   title: string;
   name: string;
-  date: Date;
+  date: string;
   tag?: string;
   content: string;
 }
