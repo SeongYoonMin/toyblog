@@ -14,7 +14,9 @@ model Board {
   id  Int @id @default(autoincrement())
   title String
   name String
-  date DateTime
+  date String
   tag String?
   content String
+  create_at DateTime
+  update_at DateTime
 }
