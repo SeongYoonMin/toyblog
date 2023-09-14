@@ -13,8 +13,8 @@ async function onResponseError({
   options,
 }: FetchContext<any> & { response: FetchResponse<ResponseType> }) {
   console.log("=========ERROR=========");
-  console.log("ERROR_CODE ====", response._data.statusCode);
-  console.log("ERROR_MESSAGE ====", response._data.statusMessage);
+  console.log(response._data);
+  alert(response._data.statusMessage);
 }
 
 async function onResponse({ response }: { response: FetchResponse<any> }) {}
