@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import dayjs from "dayjs";
 const router = useRouter();
 const title = ref<string>("");
 const content = ref<string>("");
@@ -15,7 +16,7 @@ const submitEventHandle = async () => {
     title: title.value,
     name: "유니",
     content: content.value,
-    date: new Date(),
+    date: dayjs(new Date()).format("YYYY-MM-DD"),
   };
   try {
     const data = await useApi("/api/board/write", {
@@ -24,8 +25,7 @@ const submitEventHandle = async () => {
     });
     alert(data);
     router.push("/board");
-  } catch (error) {
-  }
+  } catch (error) {}
 };
 </script>
 
@@ -35,6 +35,7 @@ const submitEventHandle = async () => {
       <legend>Form Submit Test</legend>
       <input type="text" placeholder="title" v-model="title" />
       <input type="text" placeholder="desc" v-model="content" />
+
       <button type="submit">SUBMIT</button>
     </form>
   </section>
