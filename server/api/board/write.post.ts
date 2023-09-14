@@ -11,6 +11,8 @@ export default defineEventHandler(async (event) => {
         date: body.date,
         tag: body.tag,
         content: body.content,
+        create_at: new Date(),
+        update_at: new Date(),
       },
     });
     return "작성하신 글이 등록되었습니다.";
