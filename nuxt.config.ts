@@ -21,7 +21,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-  css: ["~/assets/scss/reset.scss", "~/assets/scss/main.scss", "swiper/css"],
+  css: ["~/assets/scss/reset.scss", "~/assets/scss/main.scss", "swiper/css", "~/assets/scss/tiptap.scss"],
   modules: ['@pinia/nuxt'],
   postcss: {
     plugins: {
