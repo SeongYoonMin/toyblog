@@ -6,7 +6,10 @@ const { data } = await useApiFetch<IBoardItems[]>("/api/board/list", {
 
 <template>
   <section>
-    <h1>BOARD</h1>
+    <div class="flex w-full items-center justify-between">
+      <h1>BOARD</h1>
+      <NuxtLink to="/board/write">WRITE</NuxtLink>
+    </div>
     <div
       v-if="data"
       class="list flex items-start justify-start gap-2 flex-col py-10"
