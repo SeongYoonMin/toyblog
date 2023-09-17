@@ -34,9 +34,10 @@ const submitEventHandle = async () => {
     <form @submit.prevent="submitEventHandle">
       <legend class="sr-only">게시글 작성</legend>
       <input type="text" placeholder="title" v-model="title" />
-      <Tiptap v-model="content" />
       <button type="submit">SUBMIT</button>
     </form>
+    <Tiptap v-model="content" />
+    <div v-html="content"></div>
   </section>
 </template>
 
