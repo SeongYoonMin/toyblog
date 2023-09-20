@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useEditor, EditorContent } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
-import Heading from '@tiptap/extension-heading'
+import Heading from "@tiptap/extension-heading";
+import BubbleMenu from "@tiptap/extension-bubble-menu";
 interface Props {
   modelValue: string;
 }
@@ -9,9 +10,17 @@ const props = defineProps<Props>();
 const emits = defineEmits<{
   (e: "update:modelValue", value: string): void;
 }>();
+const bubbleMenu = ref<HTMLElement | null>(null);
+bubbleMenu.value = document.querySelector(".bubble_menu");
 const editor = useEditor({
   content: props.modelValue,
-  extensions: [StarterKit, Heading],
+  extensions: [
+    StarterKit,
+    Heading,
+    BubbleMenu.configure({
+      element: bubbleMenu.value,
+    }),
+  ],
   onUpdate: () => {
     emits("update:modelValue", editor.value?.getHTML() || "");
   },
@@ -31,27 +40,14 @@ watch(
 
 <template>
   <section>
-    <div v-if="editor">
+    <div v-if="editor" class="flex items-center justify-start gap-2 flex-wrap">
+      <div class="bubble_menu"></div>
       <button
         @click="editor.chain().focus().toggleBold().run()"
         :disabled="!editor.can().chain().focus().toggleBold().run()"
         :class="{ 'is-active': editor.isActive('bold') }"
       >
-        bold
-      </button>
-      <button
-        @click="editor.chain().focus().toggleItalic().run()"
-        :disabled="!editor.can().chain().focus().toggleItalic().run()"
-        :class="{ 'is-active': editor.isActive('italic') }"
-      >
-        italic
-      </button>
-      <button
-        @click="editor.chain().focus().toggleStrike().run()"
-        :disabled="!editor.can().chain().focus().toggleStrike().run()"
-        :class="{ 'is-active': editor.isActive('strike') }"
-      >
-        strike
+        B
       </button>
       <button
         @click="editor.chain().focus().toggleCode().run()"
@@ -185,9 +181,9 @@ button {
   }
 
   pre {
-    background: #0D0D0D;
-    color: #FFF;
-    font-family: 'JetBrainsMono', monospace;
+    background: #0d0d0d;
+    color: #fff;
+    font-family: "JetBrainsMono", monospace;
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
 
@@ -206,12 +202,12 @@ button {
 
   blockquote {
     padding-left: 1rem;
-    border-left: 2px solid rgba(#0D0D0D, 0.1);
+    border-left: 2px solid rgba(#0d0d0d, 0.1);
   }
 
   hr {
     border: none;
-    border-top: 2px solid rgba(#0D0D0D, 0.1);
+    border-top: 2px solid rgba(#0d0d0d, 0.1);
     margin: 2rem 0;
   }
 }
