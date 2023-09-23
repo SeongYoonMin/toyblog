@@ -37,7 +37,7 @@ const submitEventHandle = async () => {
       <button type="submit">SUBMIT</button>
     </form>
     <Tiptap v-model="content" />
-    <div v-html="content"></div>
+    <div v-html="content" class="content"></div>
   </section>
 </template>
 
