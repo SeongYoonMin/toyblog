@@ -64,7 +64,7 @@ watch(
         B
       </button>
       <button
-        @click="editor.chain().focus().toggleCode().run()"
+        @click="editor.chain().focus().toggleCodeBlock().run()"
         :disabled="!editor.can().chain().focus().toggleCode().run()"
         :class="{ 'is-active': editor.isActive('code') }"
       >
