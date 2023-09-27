@@ -2,7 +2,7 @@
 import dayjs from "dayjs";
 const router = useRouter();
 const title = ref<string>("");
-const content = ref<string>("");
+const content = ref<string >("");
 const submitEventHandle = async () => {
   if (title.value === "") {
     alert("타이틀을 적어주세요.");
@@ -33,12 +33,17 @@ const submitEventHandle = async () => {
   <section>
     <form @submit.prevent="submitEventHandle">
       <legend class="sr-only">게시글 작성</legend>
-      <input type="text" placeholder="title" v-model="title" />
-      <button type="submit">SUBMIT</button>
+      <div class="flex w-full items-center justify-between gap-10">
+        <input type="text" placeholder="TITLE" v-model="title" class="title flex-1 text-2xl" />
+      </div>
+      <Tiptap v-model="content" />
+      <div class="form_footer flex items-center justify-center gap-4">
+        <button type="submit">SUBMIT</button>
+        <button type="button">BACK</button>
+      </div>
     </form>
-    <Tiptap v-model="content" />
-    <div v-html="content" class="content"></div>
   </section>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>
