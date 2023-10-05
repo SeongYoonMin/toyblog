@@ -13,10 +13,33 @@
   ol {
     padding: 0 1rem;
   }
+  ul {
+    list-style: circle;
+  }
+  ol {
+    list-style: decimal;
+  }
   code {
 
     background-color: rgba(#616161, 0.1);
     color: #616161;
+  }
+
+  h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+  h3 {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+  h4 {
+    font-size: 20px;
+    margin-bottom: 4px;
   }
 
   pre {
@@ -25,6 +48,8 @@
     font-family: 'JetBrainsMono', monospace;
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
+
+    
 
     code {
       color: inherit;
@@ -104,6 +129,17 @@
 }
 .content {
   padding: 1rem 0 0;
+
+  ul,
+  ol {
+    padding: 0 1rem;
+  }
+  ul {
+    list-style: circle;
+  }
+  ol {
+    list-style: decimal;
+  }
 
   h1 {
     font-size: 40px;
