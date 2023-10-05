@@ -3,7 +3,7 @@
 <template>
   <header
     id="header"
-    class="flex items-center justify-between sticky w-full top-0 left-0 right-0 z-10 px-4 py-2"
+    class="flex items-center justify-between sticky w-full top-0 left-0 right-0 z-10 px-4 py-2 bg-white"
   >
     <NuxtLink to="/" class="link">HOME</NuxtLink>
     <ul class="flex items-center justify-center gap-3">
