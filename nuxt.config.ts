@@ -7,6 +7,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       secret: process.env.ADMIN_DATA,
+      df_url: process.env.DF_URL,
+      df_api: process.env.DF_API,
     },
   },
   app: {
