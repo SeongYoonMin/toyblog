@@ -1,9 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+</script>
 
 <template>
-  <section>
-    TEST
-  </section>
+  <section>TEST</section>
 </template>
 
 <style lang="scss" scoped></style>
