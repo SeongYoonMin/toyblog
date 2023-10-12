@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+</script>
 
 <template>
   <header
@@ -9,7 +11,12 @@
     <ul class="flex items-center justify-center gap-3">
       <li><NuxtLink to="/about" class="link">ABOUT</NuxtLink></li>
       <li><NuxtLink to="/board" class="link">BOARD</NuxtLink></li>
+      <li><NuxtLink to="/contact" class="link">CONTACT</NuxtLink></li>
+      <li><NuxtLink to="/toy" class="link">TOY</NuxtLink></li>
     </ul>
+    <div>
+      SIGN
+    </div>
   </header>
 </template>
 
