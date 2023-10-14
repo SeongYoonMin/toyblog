@@ -11,12 +11,15 @@
     <ul class="flex items-center justify-center gap-3">
       <li><NuxtLink to="/about" class="link">ABOUT</NuxtLink></li>
       <li><NuxtLink to="/board" class="link">BOARD</NuxtLink></li>
-      <li><NuxtLink to="/contact" class="link">CONTACT</NuxtLink></li>
       <li><NuxtLink to="/toy" class="link">TOY</NuxtLink></li>
+      <li><NuxtLink to="/contact" class="link">CONTACT</NuxtLink></li>
     </ul>
-    <div>
-      SIGN
+    <div class="flex items-center justify-center gap-3 ">
+      <NuxtLink class="max-w-[24px] hover:scale-125 duration-300" to="https://velog.io/@villain_uni"><img src="~assets/images/icons/velog.svg" alt="VELOG" class="w-[24px]"></NuxtLink>
+      <NuxtLink class="max-w-[24px] hover:scale-125 duration-300" to="https://github.com/SeongYoonMin"><img src="~assets/images/icons/github.svg" alt="GITHUB" class="w-[24px]"></NuxtLink>
+      <NuxtLink class="max-w-[24px] hover:scale-125 duration-300" to="mailto:namo4862@gmail.com"><img src="~assets/images/icons/google.svg" alt="GOOGLE" class="w-[24px]"></NuxtLink>
     </div>
+
   </header>
 </template>
 
