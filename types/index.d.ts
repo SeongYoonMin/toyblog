@@ -8,3 +8,14 @@ interface IBoard {
 interface IBoardItems extends IBoard {
   id: number;
 }
+
+interface ISearchDf {
+  server: string;
+  character: string;
+}
+
+interface IDfServerList {
+  id: number;
+  name: string;
+  value: string;
+}
