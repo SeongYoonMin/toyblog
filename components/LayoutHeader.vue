@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 </script>
 
 <template>
@@ -15,9 +14,9 @@
       <li><NuxtLink to="/contact" class="link">CONTACT</NuxtLink></li>
     </ul>
     <div class="flex items-center justify-center gap-3 ">
-      <NuxtLink class="max-w-[24px] hover:scale-125 duration-300" to="https://velog.io/@villain_uni"><img src="~assets/images/icons/velog.svg" alt="VELOG" class="w-[24px]"></NuxtLink>
-      <NuxtLink class="max-w-[24px] hover:scale-125 duration-300" to="https://github.com/SeongYoonMin"><img src="~assets/images/icons/github.svg" alt="GITHUB" class="w-[24px]"></NuxtLink>
-      <NuxtLink class="max-w-[24px] hover:scale-125 duration-300" to="mailto:namo4862@gmail.com"><img src="~assets/images/icons/google.svg" alt="GOOGLE" class="w-[24px]"></NuxtLink>
+      <NuxtLink class="max-w-[24px] hover:scale-125 duration-300" target="_blank" to="https://velog.io/@villain_uni"><img src="~assets/images/icons/velog.svg" alt="VELOG" class="w-[24px]"></NuxtLink>
+      <NuxtLink class="max-w-[24px] hover:scale-125 duration-300" target="_blank" to="https://github.com/SeongYoonMin"><img src="~assets/images/icons/github.svg" alt="GITHUB" class="w-[24px]"></NuxtLink>
+      <NuxtLink class="max-w-[24px] hover:scale-125 duration-300" target="_blank" to="mailto:namo4862@gmail.com"><img src="~assets/images/icons/google.svg" alt="GOOGLE" class="w-[24px]"></NuxtLink>
     </div>
 
   </header>
