@@ -6,13 +6,13 @@ const searchValue = ref<string>("");
 const searchSelect = ref<string>("default");
 
 /** DF Character는 URL Encoding 필요 */
-const searchQuery = computed(() => {
-  const { server, character } = route.query;
-  return <ISearchDf>{
-    server: server?.toString() || "",
-    character: character?.toString() || "",
-  };
-});
+// const searchQuery = computed(() => {
+//   const { server, character } = route.query;
+//   return <ISearchDf>{
+//     server: server?.toString() || "",
+//     character: character?.toString() || "",
+//   };
+// });
 
 // emits
 const updateSearchValue = (value: string) => {
@@ -36,7 +36,6 @@ const updateSearchSubmit = () => {
         serverid: searchSelect.value,
       },
     });
-    // router.push("/toy/df/" + searchValue.value + '?serverid=' + searchSelect.value)
   }
 };
 </script>
