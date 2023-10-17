@@ -1,19 +1,8 @@
 <script setup lang="ts">
 const config = useRuntimeConfig();
-const route = useRoute();
-const router = useRouter();
 const searchValue = ref<string>("");
 const searchSelect = ref<string>("default");
-
-/** DF Character는 URL Encoding 필요 */
-// const searchQuery = computed(() => {
-//   const { server, character } = route.query;
-//   return <ISearchDf>{
-//     server: server?.toString() || "",
-//     character: character?.toString() || "",
-//   };
-// });
-
+const searchDataRows = ref<ISearchDfChar | null>(null);
 // emits
 const updateSearchValue = (value: string) => {
   searchValue.value = value;
@@ -22,7 +11,7 @@ const updateSearchSelect = (value: string) => {
   searchSelect.value = value;
 };
 
-const updateSearchSubmit = () => {
+const updateSearchSubmit = async () => {
   if (searchValue.value === "") {
     alert("캐릭터명을 입력해주세요!");
     return;
@@ -30,12 +19,24 @@ const updateSearchSubmit = () => {
     alert("검색옵션을 입력해주세요!");
     return;
   } else {
-    router.push({
-      path: route.fullPath + `/${searchValue.value}`,
-      query: {
-        serverid: searchSelect.value,
-      },
-    });
+    /** DF Character Search API */
+    const { data: searchData } = await useApiFetch<ISearchDfChar>(
+      config.public.df_url + "servers/" + searchSelect.value + "/characters",
+      {
+        method: "GET",
+        query: {
+          apikey: config.public.df_api,
+          characterName: encodeURIComponent(searchValue.value),
+        },
+      }
+    );
+    searchDataRows.value = searchData.value;
+    // router.push({
+    //   path: route.fullPath + `/${searchValue.value}`,
+    //   query: {
+    //     serverid: searchSelect.value,
+    //   },
+    // });
   }
 };
 </script>
@@ -53,7 +54,18 @@ const updateSearchSubmit = () => {
       @update:select="updateSearchSelect"
       @update:submit="updateSearchSubmit"
     ></SearchToy>
-    <div class="info"></div>
+    <div class="search" v-if="searchDataRows">
+      <div class="search_rows" v-if="searchDataRows.rows">
+        <h2>검색 결과 : {{ searchDataRows.rows.length }}개</h2>
+        <div
+          class="search_items"
+          v-for="(items, index) in searchDataRows.rows"
+          :key="index"
+        >
+          {{ items }}
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
