@@ -25,3 +25,5 @@ logs
 
 *.pem
 *.crt
+*.key
+
