@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const config = useRuntimeConfig();
+const route = useRoute();
+const router = useRouter();
 const searchValue = ref<string>("");
 const searchSelect = ref<string>("default");
 const searchDataRows = ref<ISearchDfChar | null>(null);
@@ -15,29 +16,23 @@ const updateSearchSubmit = async () => {
   if (searchValue.value === "") {
     alert("캐릭터명을 입력해주세요!");
     return;
-  } else if (searchSelect.value === "default") {
+  }
+  if (searchSelect.value === "default") {
     alert("검색옵션을 입력해주세요!");
     return;
-  } else {
-    /** DF Character Search API */
-    const { data: searchData } = await useApiFetch<ISearchDfChar>(
-      config.public.df_url + "servers/" + searchSelect.value + "/characters",
-      {
-        method: "GET",
-        query: {
-          apikey: config.public.df_api,
-          characterName: encodeURIComponent(searchValue.value),
-        },
-      }
-    );
-    searchDataRows.value = searchData.value;
-    // router.push({
-    //   path: route.fullPath + `/${searchValue.value}`,
-    //   query: {
-    //     serverid: searchSelect.value,
-    //   },
-    // });
   }
+  const { data: characterList } = await useApiFetch<ISearchDfChar>(
+    "/api/toy/df/search",
+    {
+      method: "GET",
+      query: {
+        charName: searchValue.value,
+        selectOption: searchSelect.value,
+      },
+    }
+  );
+  searchDataRows.value = characterList.value;
+  console.log(searchDataRows.value);
 };
 </script>
 
@@ -56,14 +51,24 @@ const updateSearchSubmit = async () => {
     ></SearchToy>
     <div class="search" v-if="searchDataRows">
       <div class="search_rows" v-if="searchDataRows.rows">
-        <h2>검색 결과 : {{ searchDataRows.rows.length }}개</h2>
-        <div
-          class="search_items"
+        <h2 class="text-end text-2xl">검색 결과 : <strong>{{ searchDataRows.rows.length }}</strong>개</h2>
+        <NuxtLink
+        :to="route.fullPath + '/' + items.characterId"
+          class="search_items flex items-center justify-start gap-2 text-xl w-full border-b border-solid brder-[#ececec] cursor-pointer"
           v-for="(items, index) in searchDataRows.rows"
           :key="index"
         >
-          {{ items }}
-        </div>
+          <p>{{ items.characterName }}</p>
+          <p>{{ items.level }}</p>
+          <p>{{ items.jobGrowName }}</p>
+          <p>
+            {{
+              dfServer.filter((el) => {
+                return el.value === items.serverId;
+              })[0].name
+            }}
+          </p>
+        </NuxtLink>
       </div>
     </div>
   </section>
