@@ -1,44 +1,92 @@
 <script lang="ts" setup>
 const route = useRoute();
 const config = useRuntimeConfig();
-// id = 캐릭터닉네임, query-serverid = 서버아이디
 const searchQuery = computed(() => {
-  const { serverid } = route.query;
+  const { server } = route.query;
+  const { id } = route.params;
   return {
-    serverid,
+    id,
+    server,
   };
 });
-
-const { data: searchData } = await useApiFetch<ISearchDfChar>(
-  config.public.df_url + "servers/" + searchQuery.value.serverid + "/characters",
-  {
-    method: "GET",
-    query: {
-      apikey: config.public.df_api,
-      characterName: route.params.id,
+const charInfo = ref<IDfCharInfo | null>(null);
+const charBuff = ref<IDfCharBuff[] | null>(null);
+const charStatus = ref<IDfCharStatus[] | null>(null);
+const charEquip = ref<IDfEquipment[] | null>(null);
+const charAvatar = ref<IDfAvatar[] | null>(null);
+const charCreature = ref<IDfCreature | null>(null);
+const charFlag = ref<IDfFlag | null>(null);
+const charTalisman = ref<IDfTalisman | null>(null);
+await useApiFetch<
+  [
+    IDfCharInfo,
+    IDfCharStatusList,
+    IDfEquipment[],
+    IDfCharAvatar,
+    IDfCharCreature,
+    IDfCharFlag,
+    IDfCharTalisman
+  ]
+>("/api/toy/df/detail", {
+  method: "GET",
+  query: searchQuery,
+})
+  .then(({ data }) => {
+    if (data.value) {
+      charInfo.value = data.value[0];
+      charBuff.value = Object.values(data.value[1])[0];
+      charStatus.value = Object.values(data.value[1])[1];
+      charEquip.value = data.value[2];
+      charAvatar.value = data.value[3].avatar;
+      charCreature.value = data.value[4].creature;
+      charFlag.value = data.value[5].flag;
+      charTalisman.value = data.value[6].talismans;
+      return true;
     }
-  }
-);
+  })
+  .catch((error) => {
+    console.log(error);
+    return false;
+  });
 </script>
 
 <template>
   <section class="p-10">
-    <picture class="header w-full flex items-center justify-center"
-      ><img src="~assets/images/icons/df.png" alt=""
-    /></picture>
-    <div v-if="searchData" class="flex flex-col items-start justify-center w-full">
-      <div v-if="searchData.rows" class="w-full">
-        <h1 class="text-2xl font-semibold mb-10">검색 결과</h1>
-        <div v-for="items, index in searchData.rows" :key="index" class="flex items-center justify-start gap-2 w-full border-b border-[#c7c7c7]" style="border-style: groove;">
-          <p>{{ items.characterName }}</p>
-          <p>{{ items.level }}</p>
-          <p>{{ items.jobGrowName }}</p>
-          <p>{{ dfServer.filter((values) => { return items.serverId === values.value})[0].name }}</p>
+    <div class="header">
+      <picture class="thumb"
+        ><img
+          :src="
+            config.public.df_img +
+            searchQuery.server +
+            '/characters/' +
+            searchQuery.id
+          "
+          alt="캐릭터 이미지"
+      /></picture>
+      <div v-if="charInfo" class="info">
+        <p>모험단 : {{ charInfo.adventureName }}</p>
+        <p>길드 : {{ charInfo.guildName?.toString() || "없음" }}</p>
+        <p>{{ charInfo.characterName }} - {{ charInfo.level }}</p>
+        <p>직업 : {{ charInfo.jobGrowName }}</p>
+      </div>
+    </div>
+    <div class="details">
+      <template v-if="charEquip">
+        <div v-for="(items, index) in charEquip" :key="index" class="flex items-center justify-start gap-10">
+          <p class=" text-center w-[100px]">{{ items.slotName }}</p>
+          <p
+            :style="{
+              color: dfColors.filter((el) => {
+                return el.rarity === items.itemRarity;
+              })[0].colorCode,
+            }"
+            class=" flex-1"
+          >
+            {{ items.itemName }} - {{ items.itemTypeDetail }}
+          </p>
+          <p></p>
         </div>
-      </div>
-      <div v-else>
-        <h2 class="text-3xl font-bold text-center">캐릭터가 존재하지 않습니다.</h2>
-      </div>
+      </template>
     </div>
   </section>
 </template>
