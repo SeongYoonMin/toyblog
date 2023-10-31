@@ -57,6 +57,7 @@ await useApiFetch<
         ><img
           :src="
             config.public.df_img +
+            'servers/' +
             searchQuery.server +
             '/characters/' +
             searchQuery.id
@@ -72,15 +73,22 @@ await useApiFetch<
     </div>
     <div class="details">
       <template v-if="charEquip">
-        <div v-for="(items, index) in charEquip" :key="index" class="flex items-center justify-start gap-10">
-          <p class=" text-center w-[100px]">{{ items.slotName }}</p>
+        <div
+          v-for="(items, index) in charEquip"
+          :key="index"
+          class="flex items-center justify-start gap-10"
+        >
+          <p class="text-center w-[100px]">{{ items.slotName }}</p>
+          <picture
+            ><img :src="config.public.df_img + 'items/' + items.itemId" alt=""
+          /></picture>
           <p
             :style="{
               color: dfColors.filter((el) => {
                 return el.rarity === items.itemRarity;
               })[0].colorCode,
             }"
-            class=" flex-1"
+            class="flex-1"
           >
             {{ items.itemName }} - {{ items.itemTypeDetail }}
           </p>

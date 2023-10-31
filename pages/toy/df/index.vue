@@ -70,7 +70,7 @@ const updateSearchSubmit = async () => {
             <picture class="thumb"
               ><img
                 :src="
-                  config.public.df_img +
+                  config.public.df_img + 'servers/' +
                   searchSelect +
                   '/characters/' +
                   items.characterId
