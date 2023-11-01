@@ -23,9 +23,22 @@ export default defineNuxtConfig({
         },
       ],
     },
+    layoutTransition: {
+      name: "layout",
+      mode: "out-in",
+    },
+    pageTransition: {
+      name: "page",
+      mode: "out-in",
+    },
   },
-  css: ["~/assets/scss/reset.scss", "~/assets/scss/main.scss", "swiper/css", "~/assets/scss/tiptap.scss"],
-  modules: ['@pinia/nuxt'],
+  css: [
+    "~/assets/scss/reset.scss",
+    "~/assets/scss/tailwind.scss",
+    "swiper/css",
+    "~/assets/scss/tiptap.scss",
+  ],
+  modules: ["@pinia/nuxt"],
   postcss: {
     plugins: {
       tailwindcss: {},
