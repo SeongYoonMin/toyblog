@@ -1,9 +1,11 @@
 <script setup lang="ts">
 const route = useRoute();
 const config = useRuntimeConfig();
-const searchValue = ref<string>("");
-const searchSelect = ref<string>("default");
-const searchDataRows = ref<ISearchDfChar[] | null>(null);
+const searchValue = ref<string>(""); // 검색어
+const searchSelect = ref<string>("default"); // 검색옵션
+const searchDataRows = ref<ISearchDfChar[] | null>(null); // 검색 데이터 로우
+const searchCheck = ref<boolean>(false); // 검색했는지 체크
+
 // emits
 const updateSearchValue = (value: string) => {
   searchValue.value = value;
@@ -32,12 +34,13 @@ const updateSearchSubmit = async () => {
     }
   );
   searchDataRows.value = characterList.value;
+  searchCheck.value = true;
 };
 </script>
 
 <template>
-  <section class="df flex flex-col justify-center gap-10 min-h-screen">
-    <picture class="header w-full flex items-center justify-center"
+  <section class="df flex flex-col justify-start gap-10 min-h-screen box-border">
+    <picture class="header w-full flex items-center justify-center" v-if="!searchCheck"
       ><img src="~assets/images/icons/df.png" alt=""
     /></picture>
     <SearchToy
@@ -54,40 +57,41 @@ const updateSearchSubmit = async () => {
           검색 결과 : <strong>{{ searchDataRows.length }}</strong
           >개
         </h2>
-        <div class="flex flex-col gap-2 w-full">
+        <div class="grid grid-cols-4 gap-x-4 gap-y-5 w-full box-border">
           <NuxtLink
             :to="
               route.fullPath +
               '/' +
               items.characterId +
+
               '?server=' +
               searchSelect
             "
-            class="search_items flex items-center justify-start gap-2 text-xl w-full border-b border-solid border-[#c7c7c7] text-[#c7c7c7] cursor-pointer hover:text-[#616161] hover:border-[#616161] duration-300"
+            class="search_items flex flex-col items-center justify-center w-full text-[#c7c7c7] cursor-pointer hover:text-[#212121] hover:font-semibold duration-300"
             v-for="(items, index) in searchDataRows"
             :key="index"
           >
-            <picture class="thumb"
+            <picture class="thumb relative overflow-hidden h-[200px] w-full"
               ><img
                 :src="
-                  config.public.df_img + 'servers/' +
+                  config.public.df_img +
+                  'servers/' +
                   searchSelect +
                   '/characters/' +
-                  items.characterId
+                  items.characterId +
+                  '?zoom=1'
                 "
-                alt=""
+                class=" absolute top-[-30px] left-[50%] translate-x-[-50%]"
+                :alt="items.characterName"
             /></picture>
-            <div class="info flex flex-col gap-2">
-              <p>{{ items.characterName }}</p>
-              <p>{{ items.level }}</p>
-              <p>{{ items.jobGrowName }}</p>
-              <p>
-                {{
+            <div class="info flex flex-col items-center pb-[30px]">
+              <p>{{ items.characterName }} - {{
                   dfServer.filter((el) => {
                     return el.value === items.serverId;
                   })[0].name
-                }}
-              </p>
+                }}</p>
+              <p>Lv. {{ items.level }}</p>
+              <p>{{ items.jobName }} - {{ items.jobGrowName }}</p>
             </div>
           </NuxtLink>
         </div>
@@ -104,4 +108,11 @@ const updateSearchSubmit = async () => {
   </section>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.search_items {
+  box-shadow: 0px 0px 3px black;
+  &:hover {
+    box-shadow: 0px 0px 5px black;
+  }
+}
+</style>
