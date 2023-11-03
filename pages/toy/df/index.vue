@@ -44,9 +44,10 @@ const updateSearchSubmit = async () => {
       ><img src="~assets/images/icons/df.png" alt=""
     /></picture>
     <SearchToy
-      :type="'df'"
       :searchValue="searchValue"
       :searchSelect="searchSelect"
+      :selectName="'서버'"
+      :inputPlaceholder="'캐릭터명을 입력해주세요.'"
       @update:value="updateSearchValue"
       @update:select="updateSearchSelect"
       @update:submit="updateSearchSubmit"
@@ -57,7 +58,7 @@ const updateSearchSubmit = async () => {
           검색 결과 : <strong>{{ searchDataRows.length }}</strong
           >개
         </h2>
-        <div class="grid grid-cols-4 gap-x-4 gap-y-5 w-full box-border">
+        <div class="grid grid-cols-5 gap-x-4 gap-y-5 w-full box-border">
           <NuxtLink
             :to="
               route.fullPath +
