@@ -80,7 +80,7 @@ await useApiFetch<
         >
           <p class="text-center w-[100px]">{{ items.slotName }}</p>
           <picture
-            ><img :src="config.public.df_img + 'items/' + items.itemId" alt=""
+            ><img :src="config.public.df_img + 'items/' + items.itemId" alt="장비 이미지"
           /></picture>
           <p
             :style="{
@@ -92,11 +92,26 @@ await useApiFetch<
           >
             {{ items.itemName }} - {{ items.itemTypeDetail }}
           </p>
-          <p></p>
+          <p>{{ items.itemGradeName }}</p>
         </div>
+      </template>
+      <template v-if="charAvatar">
+        <div v-for="items, index, in charAvatar" :key="index" class="flex items-center justify-start gap-10">
+          <p class="text-center w-[100px]">{{ items.slotName }}</p>
+          <picture><img :src="config.public.df_img + 'items/' + items.itemId" alt="아바타 이미지"></picture>
+          <p :style="{
+              color: dfColors.filter((el) => {
+                return el.rarity === items.itemRarity;
+              })[0].colorCode,
+            }"
+            class="flex-1">{{ items.itemName }}{{ items.slotName !== '오라 아바타' ? ' - ' + items.optionAbility : ''}}</p>
+        </div>
+      </template>
+      <template v-if="charCreature">
+        {{ charCreature }}
       </template>
     </div>
   </section>
 </template>
-
+ 
 <style lang="scss" scoped></style>
