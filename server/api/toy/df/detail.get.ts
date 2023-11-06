@@ -97,7 +97,7 @@ export default defineEventHandler(async (event) => {
           }
         )
         .then((response) => {
-          return response.data.creature;
+          return response.data;
         }),
       // 캐릭터 장착 휘장
       await axios
@@ -116,7 +116,7 @@ export default defineEventHandler(async (event) => {
           }
         )
         .then((response) => {
-          return response.data.flag;
+          return response.data;
         }),
       // 캐릭터 장착 탈리스만
       await axios
@@ -135,7 +135,67 @@ export default defineEventHandler(async (event) => {
           }
         )
         .then((response) => {
-          return response.data.talismans;
+          return response.data;
+        }),
+      await axios
+        .get<IDfCharBuffEquip>(
+          config.df_url +
+            "servers/" +
+            charId.server +
+            "/characters/" +
+            charId.id +
+            "/skill/buff/equip/equipment",
+          {
+            method: "GET",
+            params: {
+              apikey: config.df_api,
+            },
+          }
+        )
+        .then((response) => {
+          let text : string = response.data.skill.buff.skillInfo.option.desc;
+          const values : string[] = response.data.skill.buff.skillInfo.option.values;
+          for(let i = 0; i < values.length; i++) {
+            text = text.replace(`{value${i+1}}`, values[i]);
+          }
+          console.log(text);
+          return response.data;
+        }),
+      await axios
+        .get<IDfCharBuffAvatar>(
+          config.df_url +
+            "servers/" +
+            charId.server +
+            "/characters/" +
+            charId.id +
+            "/skill/buff/equip/avatar",
+          {
+            method: "GET",
+            params: {
+              apikey: config.df_api,
+            },
+          }
+        )
+        .then((response) => {
+          return response.data;
+        }),
+      await axios
+        .get<IDfCharBuffCreature>(
+          config.df_url +
+            "servers/" +
+            charId.server +
+            "/characters/" +
+            charId.id +
+            "/skill/buff/equip/creature",
+          {
+            method: "GET",
+            params: {
+              apikey: config.df_api,
+            },
+          }
+        )
+        .then((response) => {
+          return response.data;
         }),
     ]).then((response) => {
       return response;
