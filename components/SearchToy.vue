@@ -30,7 +30,7 @@ const updateSearchSubmit = () => {
 <template>
   <form
     @submit.prevent="updateSearchSubmit"
-    class="flex w-full items-center justify-center search_form overflow-hidden px-2 max-w-[500px] mx-auto bg-[#f5f5f5] gap-1"
+    class="flex w-full items-center justify-center search_form overflow-hidden px-4 max-w-[500px] mx-auto bg-[#f5f5f5] gap-1 "
   >
     <legend class="sr-only">검색</legend>
     <div class="select_box relative cursor-pointer">
@@ -60,7 +60,7 @@ const updateSearchSubmit = () => {
     />
     <button
       type="submit"
-      class="w-full max-w-[80px] text-center hover:font-semibold duration-300 font-medium"
+      class="w-full max-w-[40px] text-center hover:font-semibold duration-300 font-medium"
     >
       검색
     </button>
