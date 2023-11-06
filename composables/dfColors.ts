@@ -2,7 +2,7 @@ export const dfColors = ref<IDfRarityColors[]>([
   {
     id: 0,
     rarity: '커먼',
-    colorCode: '#FFFFFF',
+    colorCode: '#c7c7c7',
   },
   {
     id: 1,
