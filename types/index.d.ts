@@ -81,7 +81,7 @@ interface IDfEquipment {
   enchant?: {
     status: {
       name: string;
-      value: string; 
+      value: string;
     }[];
   };
   itemAvailableLevel: number;
@@ -161,7 +161,7 @@ interface IDfFlag {
 }
 
 interface IDfCharTalisman extends IDfCharInfo {
-  talismans: IDfTalisman;
+  talismans: IDfTalisman[];
 }
 interface IDfTalisman {
   runes: {
@@ -175,6 +175,117 @@ interface IDfTalisman {
     itemName: string;
     runeTypes: string[];
   };
+}
+
+interface IDfCharBuffEquip extends IDfCharInfo {
+  skill: {
+    buff: IDfBuffEquip;
+  };
+}
+interface IDfBuffEquip {
+  skillInfo: {
+    skillId: string;
+    name: string;
+    detail?: string;
+    option: {
+      level: number;
+      desc: string;
+      values: string[];
+    };
+  };
+  equipment: {
+    slotId: string;
+    slotName: string;
+    itemId: string;
+    itemName: string;
+    itemTypeId: string;
+    itemType: string;
+    itemTypeDetailId: string;
+    itemTypeDetail: string;
+    itemAvailableLevel: number;
+    itemRarity: string;
+    setItemId: string;
+    setItemName: string;
+    reinforce: number;
+    amplificationName: any;
+    refine: number;
+    enchant?: {
+      reinforceSkill: {
+        jobId: string;
+        jobName: string;
+        skils: {
+          skillId: string;
+          name: string;
+          value: number;
+        }[];
+      }[];
+    };
+  }[];
+}
+
+interface IDfCharBuffAvatar extends IDfCharInfo {
+  skill: {
+    buff: IDfBuffAvatar;
+  };
+}
+interface IDfBuffAvatar {
+  skillInfo: {
+    skillId: string;
+    name: string;
+    option: {
+      level: number;
+      desc: string;
+      values: string[];
+    };
+  };
+  avatar: {
+    slotId: string;
+    slotName: string;
+    itemId: string;
+    itemName: string;
+    itemRarity: string;
+    cloneAvatarName: string;
+    optionAbility: string;
+    emblems: {
+      slotNo: number;
+      slotColor: string;
+      itemName: string;
+      itemRarity: string;
+    }[];
+  }[];
+}
+
+interface IDfCharBuffCreature extends IDfCharInfo {
+  skill: {
+    buff: IDfBuffCreature;
+  };
+}
+interface IDfBuffCreature {
+  skillInfo: {
+    skillId: string;
+    name: string;
+    option: {
+      level: number;
+      desc: string;
+      values: string[];
+    };
+  };
+  creature: {
+    itemId: string;
+    itemName: string;
+    itemRarity: string;
+    enchant?: {
+      reinforceSkill: {
+        jobId: string;
+        jobName: string;
+        skils: {
+          skillId: string;
+          name: string;
+          value: number;
+        }[];
+      }[];
+    };
+  }[];
 }
 
 interface IDfRarityColors {
