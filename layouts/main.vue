@@ -11,7 +11,5 @@
 </template>
 
 <style lang="scss" scoped>
-#app {
-  background-color: #DEE7E9;
-}
+
 </style>
