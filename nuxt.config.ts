@@ -35,8 +35,9 @@ export default defineNuxtConfig({
   css: [
     "~/assets/scss/reset.scss",
     "~/assets/scss/tailwind.scss",
-    "swiper/css",
     "~/assets/scss/tiptap.scss",
+    "~/assets/scss/typed.scss",
+    "swiper/css",
   ],
   modules: ["@pinia/nuxt"],
   postcss: {
