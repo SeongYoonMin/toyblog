@@ -11,5 +11,7 @@
 </template>
 
 <style lang="scss" scoped>
-
+#app {
+  max-height: 100vh;
+}
 </style>
