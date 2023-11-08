@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const route = useRoute();
+const nowPath = ref<string>(route.path);
 const links = ref<{ to: string; title: string }[]>([
   {
     to: "/about",
@@ -34,6 +36,10 @@ const blanks = ref<{ to: string; src: string; title: string }[]>([
     title: "GOOGLE",
   },
 ]);
+watch(()=>route.path, (path) => {
+  nowPath.value = path;
+  console.log(nowPath.value);
+});
 </script>
 
 <template>
@@ -51,6 +57,7 @@ const blanks = ref<{ to: string; src: string; title: string }[]>([
         v-for="(items, index) in links"
         :key="index + 'links'"
         class="link"
+        :class="{selected: nowPath === items.to}"
         :to="items.to"
         >{{ items.title }}</NuxtLink
       >
@@ -72,6 +79,10 @@ const blanks = ref<{ to: string; src: string; title: string }[]>([
 <style lang="scss" scoped>
 .link {
   @apply text-white text-2xl px-5 duration-300;
+  &.selected {
+    color: #00ff00;
+  };
+  
   &:hover {
     color: #00ff00;
     text-shadow: 1px 4px 5px rgba(0, 255, 0, 0.5);
