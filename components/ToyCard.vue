@@ -15,7 +15,13 @@ const emits = defineEmits<Emits>();
 </script>
 
 <template>
-  <section></section>
+  <section class="card">
+    <picture class="thumb"><img :src="props.img" :alt="props.title" /></picture>
+    <div class="info"></div>
+  </section>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+
+</style>
