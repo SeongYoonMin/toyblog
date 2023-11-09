@@ -21,7 +21,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="w-full h-screen box-border flex items-center justify-center">
+  <section class="w-full h-[80vh] box-border flex items-center justify-center">
     <h1 ref="typedContent" class="typed"></h1>
   </section>
 </template>

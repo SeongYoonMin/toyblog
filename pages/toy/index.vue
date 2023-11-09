@@ -8,7 +8,7 @@ const toyList = ref<
   {
     title: "DUNGEON&FIGTHER",
     date: "2023.10.06 - 2023.11.06",
-    img: "",
+    img: "images/toy-df.png",
     intro: "toy/df/intro",
     to: "toy/df",
   },
@@ -18,9 +18,7 @@ const toyList = ref<
 <template>
   <section class="toy flex flex-col items-start justify-center py-20">
     <ClinetOnly class="w-full">
-      <div>
-        <h1 class="text-[88px]">TOY</h1>
-      </div>
+      <h1 class="text-[88px]">TOY</h1>
       <Swiper class="w-full list" :spaceBetween="20" :slidesPerView="2.67">
         <SwiperSlide v-for="(items, index) in toyList" :key="index">
           <ToyCard
