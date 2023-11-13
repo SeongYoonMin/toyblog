@@ -1,7 +1,5 @@
 <script setup lang="ts">
 const { $swiper } = useNuxtApp();
-console.log($swiper);
-
 const toyList = ref<
   { title: string; date: string; img: string; intro: string; to: string }[]
 >([
@@ -17,8 +15,8 @@ const toyList = ref<
 
 <template>
   <section class="toy flex flex-col items-start justify-center py-20">
-    <ClinetOnly class="w-full">
-      <h1 class="text-[88px]">TOY</h1>
+    <h1 class="text-[88px]">TOY</h1>
+    <ClientOnly>
       <Swiper class="w-full list" :spaceBetween="20" :slidesPerView="2.67">
         <SwiperSlide v-for="(items, index) in toyList" :key="index">
           <ToyCard
@@ -30,7 +28,7 @@ const toyList = ref<
           />
         </SwiperSlide>
       </Swiper>
-    </ClinetOnly>
+    </ClientOnly>
   </section>
 </template>
 
