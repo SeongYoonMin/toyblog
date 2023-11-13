@@ -16,21 +16,25 @@ const { data } = await useApiFetch<IBoardItems[]>("/api/board/list", {
       >
     </div>
     <div class="sort pb-10 flex items-center justify-end py-3">
-      <button type="button" class="px-3 text-[#9A9CA1] relative desc">최신순</button>
+      <button type="button" class="px-3 text-[#9A9CA1] relative desc">
+        최신순
+      </button>
       <button type="button" class="px-3 text-[#9A9CA1] asc">오래된순</button>
     </div>
-    <div v-if="data" class="list flex items-start justify-start flex-col">
-      <NuxtLink
-        v-for="items in data"
-        :key="items.id"
-        :to="'/board/' + items.id"
-        class="p-5 flex flex-col items-strat justify-center border-b border-solid border-[#424242] w-full"
-      >
-        <h2 class="text-2xl">{{ items.title }}</h2>
-        <p v-html="items.content" class="text-[#9A9CA1] pt-2 pb-3"></p>
-        <p class="text-xs text-[#4F535E]">{{ items.date }}</p>
-      </NuxtLink>
-    </div>
+    <ClientOnly>
+      <div v-if="data" class="list flex items-start justify-start flex-col">
+        <NuxtLink
+          v-for="items in data"
+          :key="items.id"
+          :to="'/board/' + items.id"
+          class="p-5 flex flex-col items-strat justify-center border-b border-solid border-[#424242] w-full"
+        >
+          <h2 class="text-2xl">{{ items.title }}</h2>
+          <p v-html="items.content" class="text-[#9A9CA1] pt-2 pb-3"></p>
+          <p class="text-xs text-[#4F535E]">{{ items.date }}</p>
+        </NuxtLink>
+      </div>
+    </ClientOnly>
   </section>
 </template>
 
