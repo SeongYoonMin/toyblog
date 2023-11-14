@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import dayjs from "dayjs";
+
 const contactType = ref<string>("프로젝트 의뢰");
 const contactName = ref<string>("");
 const contactCompany = ref<string>("");
@@ -25,28 +27,46 @@ const contactRadio = ref<{ id: number; value: string }[]>([
 ]);
 
 const submitContact = async () => {
-  // const validateState = validate([
-  //   {
-  //     validateName: "이름",
-  //     validateValue: contactName.value,
-  //   },
-  //   {
-  //     validateName: "소속",
-  //     validateValue: contactCompany.value,
-  //   },
-  //   {
-  //     validateName: "이메일",
-  //     validateValue: contactEmail.value,
-  //   },
-  //   {
-  //     validateName: "전화번호",
-  //     validateValue: contactPhone.value,
-  //   },
-  //   {
-  //     validateName: "문의 내용",
-  //     validateValue: contactTextArea.value,
-  //   },
-  // ]);
+  const validateState: { status: boolean; problem: string } = validate([
+    {
+      validateName: "이름",
+      validateValue: contactName.value,
+    },
+    {
+      validateName: "소속",
+      validateValue: contactCompany.value,
+    },
+    {
+      validateName: "이메일",
+      validateValue: contactEmail.value,
+    },
+    {
+      validateName: "전화번호",
+      validateValue: contactPhone.value,
+    },
+    {
+      validateName: "문의 내용",
+      validateValue: contactTextArea.value,
+    },
+  ]);
+  if (!validateState.status) {
+    alert(validateState.problem + "을 적어주세요!");
+    return;
+  }
+  const body = {
+    name: contactName.value,
+    type: contactType.value,
+    company: contactCompany.value,
+    email: contactEmail.value,
+    phone: contactPhone.value,
+    inquiry: contactTextArea.value,
+    date: dayjs(new Date()).format("YYYY-MM-DD"),
+  };
+
+  const data: { status: boolean; message: string } = await useApi("/api/mail", {
+    method: "POST",
+    body: body,
+  });
 };
 </script>
 
