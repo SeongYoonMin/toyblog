@@ -10,6 +10,8 @@ export default defineNuxtConfig({
       df_url: process.env.DF_URL,
       df_api: process.env.DF_API,
       df_img: process.env.DF_IMG,
+      mail_user: process.env.MAIL_USER,
+      mail_pass: process.env.MAIL_PASS,
     },
   },
   app: {
