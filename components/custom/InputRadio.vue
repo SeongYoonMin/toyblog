@@ -20,8 +20,8 @@ const value = computed({
 
 <template>
   <label :for="props.name">
-    <p class="radio_items">{{ props.name }}</p>
     <input type="radio" :id="props.name" v-model="value" :value="props.name" class="sr-only" />
+    <p class="radio_items">{{ props.name }}</p>
   </label>
 </template>
 <!-- 
