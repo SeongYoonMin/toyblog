@@ -4,7 +4,7 @@ const toyList = ref<
   { title: string; date: string; img: string; intro: string; to: string }[]
 >([
   {
-    title: "DUNGEON&FIGTHER",
+    title: "DUNGEON<br/>&FIGTHER",
     date: "2023.10.06 - 2023.11.06",
     img: "images/toy-df.png",
     intro: "toy/df/intro",
