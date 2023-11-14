@@ -158,7 +158,6 @@ export default defineEventHandler(async (event) => {
           for(let i = 0; i < values.length; i++) {
             text = text.replace(`{value${i+1}}`, values[i]);
           }
-          console.log(text);
           return response.data;
         }),
       await axios
