@@ -7,14 +7,14 @@ interface Props {
   to: string; // 링크
 }
 interface Emits {
-  (e: "update:intro"): void;
+  (e: "update:intro", value: string): void;
   (e: "update:to"): void;
 }
 const props = defineProps<Props>();
 const emits = defineEmits<Emits>();
 
 const introButtonEvent = () => {
-  emits("update:intro");
+  emits("update:intro", props.intro);
 };
 const toButtonEvent = () => {
   emits("update:to");
