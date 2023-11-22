@@ -32,20 +32,13 @@ const toButtonEvent = () => {
         <p>{{ props.date }}</p>
       </div>
       <div class="link">
-        <button
-          class="update_button update_intro"
-          type="button"
-          @click="introButtonEvent"
-        >
-          개요
-        </button>
-        <button
+        <NuxtLink
           class="update_button update_to"
-          type="button"
+          :to="props.to"
           @click="toButtonEvent"
         >
           실행
-        </button>
+        </NuxtLink>
       </div>
     </div>
   </section>

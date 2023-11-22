@@ -39,14 +39,12 @@ const updateSearchSubmit = async () => {
 </script>
 
 <template>
-  <section class="df flex flex-col justify-start gap-10 min-h-screen box-border">
-    <picture class="header w-full flex items-center justify-center" v-if="!searchCheck"
-      ><img src="~assets/images/icons/df.png" alt=""
-    /></picture>
+  <section class="flex flex-col justify-start gap-10 box-border h-full">
     <SearchToy
       :searchValue="searchValue"
       :searchSelect="searchSelect"
       :selectName="'서버'"
+      :inputLogoImg="'~assets/images/df_logo.png'"
       :inputPlaceholder="'캐릭터명을 입력해주세요.'"
       @update:value="updateSearchValue"
       @update:select="updateSearchSelect"
