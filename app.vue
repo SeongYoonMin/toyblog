@@ -4,6 +4,12 @@
   </NuxtLayout>
 </template>
 <style>
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.4s;
