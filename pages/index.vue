@@ -11,7 +11,7 @@ const typedText = ref<string[]>([
 onMounted(() => {
   const typed = new $Typed(typedContent.value, {
     strings: typedText.value,
-    typeSpeed: 150,
+    typeSpeed: 1500,
     backSpeed: 50,
   });
 });
