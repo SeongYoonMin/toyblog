@@ -6,7 +6,7 @@ const { $Typed } = useNuxtApp();
 const typedContent = ref();
 const typedText = ref<string[]>([
   "Hello, World!",
-  "I'm Front-end Junior Developer!",
+  "I'm Front-end Junior Developer! 엑셀",
 ]);
 onMounted(() => {
   const typed = new $Typed(typedContent.value, {
