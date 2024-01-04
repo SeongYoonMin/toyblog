@@ -12,6 +12,8 @@ export default defineNuxtConfig({
       df_img: process.env.DF_IMG,
       mail_user: process.env.MAIL_USER,
       mail_pass: process.env.MAIL_PASS,
+      maple_url: process.env.MAPLE_URL,
+      maple_api: process.env.MAPLE_API,
     },
   },
   app: {
